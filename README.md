@@ -1,5 +1,7 @@
 ## DOL-18F WHISARD MVP
 
+[![Code Climate GPA](https://codeclimate.com/github/18F/dol-whisard/badges/gpa.svg)](https://codeclimate.com/github/18F/dol-whisard)
+
 ### Prerequisites
 
 Requires Node 6.9.0 or higher and NPM 3 or higher.
