@@ -1,14 +1,14 @@
-import { DolWhisardPage } from './app.po';
+import { DolWhisardPage } from './app.po'
 
 describe('dol-whisard App', () => {
-  let page: DolWhisardPage;
+  let page: DolWhisardPage
 
   beforeEach(() => {
-    page = new DolWhisardPage();
-  });
+    page = new DolWhisardPage()
+  })
 
   it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
-  });
-});
+    page.navigateTo()
+    expect(page.getParagraphText()).toEqual('Welcome to app!')
+  })
+})

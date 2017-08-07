@@ -1,5 +1,17 @@
 ## DOL-18F WHISARD MVP
 
+### Prerequisites
+
+Requires Node 6.9.0 or higher and NPM 3 or higher.
+
+### Installation
+
+Before you install, please read the [prerequisites](#prerequisites).
+
+```bash
+npm install
+```
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
