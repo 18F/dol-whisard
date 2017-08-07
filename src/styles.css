@@ -1,5 +1,52 @@
-@import '~basscss/css/basscss.min.css';
+@import '~ace-css/css/ace.min.css';
+
+html {
+  font-size: 18px;
+}
+
+body {
+  background-color: #ebeff1;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: avenir next, avenir, helvetica, arial, sans-serif;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+th {
+  font-weight: bold;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+th,
+td {
+  line-height: inherit;
+  padding: 0;
+}
+
+td {
+  vertical-align: top;
+}
 
 .container {
-  max-width: 900px;
+  max-width: 1000px;
+}
+
+.monospace {
+  font-family: consolas, courier, monospace;
+}
+
+.light {
+  font-weight: 300;
 }
