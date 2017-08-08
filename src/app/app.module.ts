@@ -3,19 +3,21 @@ import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule, Routes } from '@angular/router'
 
 import { AppComponent } from './app.component'
-import { ImportComponent } from './import.component'
+import { ImportPageComponent } from './import-page.component'
 import { NotFoundComponent } from './not-found.component'
 
+import { FileReaderService } from './_service/file-reader.service'
+
 const routes: Routes = [
-  { path: 'import', component: ImportComponent },
+  { path: 'import', component: ImportPageComponent },
   { path: '', redirectTo: '/import', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ]
 
 @NgModule({
   imports: [BrowserModule, RouterModule.forRoot(routes)],
-  declarations: [AppComponent, ImportComponent, NotFoundComponent],
-  providers: [],
+  declarations: [AppComponent, ImportPageComponent, NotFoundComponent],
+  providers: [FileReaderService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
