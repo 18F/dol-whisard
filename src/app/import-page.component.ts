@@ -13,6 +13,7 @@ const { aoa_to_sheet, book_append_sheet, book_new, sheet_to_json } = XLS.utils
 })
 export class ImportPageComponent {
   data = null
+  idx = 0
 
   constructor(private reader: FileReaderService) {}
 
@@ -52,5 +53,9 @@ export class ImportPageComponent {
     // save workbook locally
     const wbout = XLS.write(wb, { bookType: 'xlsx', type: 'binary' })
     saveAs(new Blob([s2ab(wbout)]), 'foobar.xls')
+  }
+
+  seek(n) {
+    this.idx += n
   }
 }
