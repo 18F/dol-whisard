@@ -8,7 +8,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --watch=false",
+    "test:watch": "ng test",
     "lint": "ng lint --type-check",
     "e2e": "ng e2e",
     "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{e2e,src}/**/*.{js,ts}\""
