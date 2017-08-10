@@ -1,7 +1,9 @@
 {
   "name": "dol-whisard",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "0.0.1",
+  "engines": {
+    "node": "6.11.x"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
