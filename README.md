@@ -1,6 +1,6 @@
 ## DOL-18F WHISARD MVP
 
-[![Code Climate GPA](https://codeclimate.com/github/18F/dol-whisard/badges/gpa.svg)](https://codeclimate.com/github/18F/dol-whisard)
+[![Build status on CircleCI](https://circleci.com/gh/18F/dol-whisard/tree/master.svg?style=svg)](https://circleci.com/gh/18F/dol-whisard/tree/master) [![Code Climate GPA](https://codeclimate.com/github/18F/dol-whisard/badges/gpa.svg)](https://codeclimate.com/github/18F/dol-whisard)
 
 ### Prerequisites
 
