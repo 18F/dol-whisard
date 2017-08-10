@@ -3,7 +3,7 @@ import { saveAs } from 'file-saver'
 import * as XLS from 'xlsx'
 
 import { FileReaderService } from './_service/file-reader.service'
-import { s2ab } from './_util'
+import { s2ab, COLUMNS } from './_util'
 
 const { aoa_to_sheet, book_append_sheet, book_new, sheet_to_json } = XLS.utils
 
@@ -12,6 +12,7 @@ const { aoa_to_sheet, book_append_sheet, book_new, sheet_to_json } = XLS.utils
   templateUrl: './import-page.component.html',
 })
 export class ImportPageComponent {
+  cols = COLUMNS
   data = null
   idx = 0
 
