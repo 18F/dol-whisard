@@ -37,7 +37,13 @@
         </button>
       </div>
       <div>Showing row {{ idx + 1 }} of {{ data.length }}:</div>
-      <pre class='m0 p2 bg-darken-1 overflow-auto'>{{ data[idx] | json }}</pre>
+      <pre class='mt0 mb2 p2 bg-darken-1 overflow-auto'>{{ data[idx] | json }}</pre>
+      <button
+        class="btn btn-small btn-primary h5 regular"
+        (click)="downloadData()"
+      >
+        Download data
+      </button>
     </div>
   </div>
   <div class='mb3'>

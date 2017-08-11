@@ -40,7 +40,9 @@ export class ImportPageComponent {
     // save data
     const data = sheet_to_json(ws, { header: 1 })
     console.log('data: ', data)
+
     this.data = data
+    this.idx = 0
   }
 
   downloadData() {
@@ -53,7 +55,7 @@ export class ImportPageComponent {
 
     // save workbook locally
     const wbout = XLS.write(wb, { bookType: 'xlsx', type: 'binary' })
-    saveAs(new Blob([s2ab(wbout)]), 'foobar.xls')
+    saveAs(new Blob([s2ab(wbout)]), 'output.xls')
   }
 
   seek(n) {
