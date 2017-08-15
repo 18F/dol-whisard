@@ -13,7 +13,7 @@
     "lint": "ng lint --type-check",
     "e2e": "ng e2e",
     "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{e2e,src}/**/*.{js,ts}\"",
-    "predeploy": "npm run build",
+    "predeploy": "ng build --prod --base-href \"https://federalist-proxy.app.cloud.gov/site/18f/dol-whisard/\"",
     "deploy": "gh-pages -d dist -b dist"
   },
   "private": true,

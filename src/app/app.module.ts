@@ -9,8 +9,7 @@ import { NotFoundComponent } from './not-found.component'
 import { FileReaderService } from './_service/file-reader.service'
 
 const routes: Routes = [
-  { path: 'import', component: ImportPageComponent },
-  { path: '', redirectTo: '/import', pathMatch: 'full' },
+  { path: '', component: ImportPageComponent },
   { path: '**', component: NotFoundComponent },
 ]
 
