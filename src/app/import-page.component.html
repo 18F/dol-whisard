@@ -16,49 +16,77 @@
   <div class='mb3'>
     <div class='mb1 h3'>1. Select file</div>
     <input type='file' (change)='loadFile($event)' multiple='false'>
-    <div *ngIf='data && data.length' class='py2'>
-      <div class='h6 bold caps'>Preview data</div>
-      <div class='py1'>
-        <button
-          type="button"
-          class="btn btn-small btn-outline h5 regular"
-          [disabled]="!idx"
-          (click)="seek(-1)"
-        >
-          Prev
-        </button>
-        <button
-          type="button"
-          class="btn btn-small btn-outline h5 regular"
-          [disabled]="idx + 1 === data.length"
-          (click)="seek(1)"
-        >
-          Next
-        </button>
-      </div>
-      <div>Showing row {{ idx + 1 }} of {{ data.length }}:</div>
-      <pre class='mt0 mb2 p2 bg-darken-1 overflow-auto'>{{ data[idx] | json }}</pre>
-      <button
-        class="btn btn-small btn-primary h5 regular"
-        (click)="downloadData()"
-      >
-        Download data
-      </button>
-    </div>
   </div>
   <div class='mb3'>
     <div class='mb1 h3'>2. Choose which columns to import</div>
-    <div>
-      <div
-        *ngFor="let col of cols"
-        class='py1 border-bottom border-silver'
-      >
-        {{ col.name }}
-      </div>
+    <div class="overflow-auto">
+      <table class="table-light">
+        <thead>
+          <tr>
+            <th class='col-4'>WHISARD Database</th>
+            <th class='col-4'>Imported File</th>
+            <th class='col-4'>Sample Row</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let col of cols; let i = index">
+            <td>{{ col.name }}</td>
+            <ng-container
+              *ngIf="!data; then cellNoData else cellHasData"
+            ></ng-container>
+            <td>--</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div>
     <button class='btn btn-primary regular' type='button'>Import</button>
     <button class='btn btn-outline regular' type='button'>Cancel</button>
   </div>
+  <div *ngIf='data && data.length' class='py4'>
+    <div class='h6 bold caps'>Preview data</div>
+    <div class='py1'>
+      <button
+        type="button"
+        class="btn btn-small btn-outline h5 regular"
+        [disabled]="!idx"
+        (click)="seek(-1)"
+      >
+        Prev
+      </button>
+      <button
+        type="button"
+        class="btn btn-small btn-outline h5 regular"
+        [disabled]="idx + 1 === data.length"
+        (click)="seek(1)"
+      >
+        Next
+      </button>
+    </div>
+    <div>Showing row {{ idx + 1 }} of {{ data.length }}:</div>
+    <pre class='mt0 mb2 p2 bg-darken-1 overflow-auto'>{{ data[idx] | json }}</pre>
+    <button
+      class="btn btn-small btn-primary h5 regular"
+      (click)="downloadData()"
+    >
+      Download data
+    </button>
+  </div>
 </div>
+
+<ng-template #cellNoData>
+  <td>
+    <select class='select m0 h-2 sm-col-6' disabled='true'>
+      <option>--<option>
+    </select>
+  </td>
+</ng-template>
+
+<ng-template #cellHasData>
+  <td>
+    <select class='select m0 h-2 sm-col-10'>
+      <option *ngFor="let d of data[0]">{{ d }}</option>
+    </select>
+  </td>
+</ng-template>

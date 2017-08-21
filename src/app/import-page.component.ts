@@ -14,6 +14,7 @@ const { aoa_to_sheet, book_append_sheet, book_new, sheet_to_json } = XLS.utils
 export class ImportPageComponent {
   cols = COLUMNS
   data = null
+  dataHeader = null
   idx = 0
 
   constructor(private reader: FileReaderService) {}
@@ -42,6 +43,7 @@ export class ImportPageComponent {
     console.log('data: ', data)
 
     this.data = data
+    this.dataHeader = data[0]
     this.idx = 0
   }
 

@@ -32,11 +32,11 @@ th {
 th,
 td {
   line-height: inherit;
-  padding: 0;
+  padding: .5rem;
 }
 
 td {
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .container {
@@ -60,4 +60,8 @@ td {
 
 .table-light tr:last-child td {
   border-bottom: 0;
+}
+
+.h-2 {
+  height: 2rem;
 }
