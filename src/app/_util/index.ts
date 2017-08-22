@@ -10,6 +10,21 @@ export const s2ab = s => {
   return buff
 }
 
+const toObj = (keys, vals) =>
+  keys.reduce((obj, key, idx) => {
+    obj[key] = vals[idx]
+    return obj
+  }, {})
+
+export const cleanData = data => {
+  if (!data.length) return
+
+  const keys = data[0]
+  const entries = data.slice(1).map(datum => toObj(keys, datum))
+
+  return { keys, entries }
+}
+
 export const COLUMNS = [
   {
     id: 'Ee_F_Name',

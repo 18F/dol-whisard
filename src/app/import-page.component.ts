@@ -1,11 +1,7 @@
 import { Component } from '@angular/core'
-import { saveAs } from 'file-saver'
-import * as XLS from 'xlsx'
 
 import { FileReaderService } from './_service/file-reader.service'
-import { s2ab, COLUMNS } from './_util'
-
-const { aoa_to_sheet, book_append_sheet, book_new, sheet_to_json } = XLS.utils
+import { cleanData, COLUMNS } from './_util'
 
 @Component({
   selector: 'app-import',
@@ -14,7 +10,8 @@ const { aoa_to_sheet, book_append_sheet, book_new, sheet_to_json } = XLS.utils
 export class ImportPageComponent {
   cols = COLUMNS
   data = null
-  dataHeader = null
+  dataKeys = null
+  dataRaw = null
   idx = 0
 
   constructor(private reader: FileReaderService) {}
@@ -27,37 +24,27 @@ export class ImportPageComponent {
       return
     }
 
-    this.reader.load(files[0]).then(data => this.parseFile(data))
+    this.reader
+      .load(files[0])
+      .then(this.reader.parseData)
+      .then(data => this.handleData(data))
   }
 
-  parseFile(bstr) {
-    // read workbook
-    const wb = XLS.read(bstr, { type: 'binary' })
+  handleData(dataRaw) {
+    // reformat data (to array of objects)
+    const dataClean = cleanData(dataRaw)
+    if (!dataClean) return
 
-    // get first sheet
-    const wsname = wb.SheetNames[0]
-    const ws = wb.Sheets[wsname]
+    const { keys, entries } = dataClean
 
-    // save data
-    const data = sheet_to_json(ws, { header: 1 })
-    console.log('data: ', data)
-
-    this.data = data
-    this.dataHeader = data[0]
+    this.data = entries
+    this.dataKeys = keys
+    this.dataRaw = dataRaw
     this.idx = 0
   }
 
   downloadData() {
-    // generate worksheet
-    const ws = aoa_to_sheet(this.data)
-
-    // generate workbook and add the worksheet
-    const wb = book_new()
-    book_append_sheet(wb, ws, 'Sheet1')
-
-    // save workbook locally
-    const wbout = XLS.write(wb, { bookType: 'xlsx', type: 'binary' })
-    saveAs(new Blob([s2ab(wbout)]), 'output.xls')
+    this.reader.downloadData(this.dataRaw)
   }
 
   seek(n) {

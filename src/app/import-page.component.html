@@ -86,7 +86,7 @@
 <ng-template #cellHasData>
   <td>
     <select class='select m0 h-2 sm-col-10'>
-      <option *ngFor="let d of data[0]">{{ d }}</option>
+      <option *ngFor="let key of dataKeys">{{ key }}</option>
     </select>
   </td>
 </ng-template>
