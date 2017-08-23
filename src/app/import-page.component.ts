@@ -9,22 +9,32 @@ import { cleanData, expectedFields } from './_util'
 })
 export class ImportPageComponent {
   fields = expectedFields.map(d => ({ ...d, match: null }))
+  error = null
   data = null
   dataKeys = null
   dataRaw = null
 
   constructor(private reader: FileReaderService) {}
 
-  loadFile(e) {
+  handleUpload(e) {
     const files = e.target.files
+    const file = files[0]
+    const ext = file.name.split('.').pop()
 
     if (files.length !== 1) {
-      console.log('Cannot upload multiple files on the entry')
+      this.error = 'Only one file can be uploaded at a time.'
       return
     }
 
+    if (!ext.includes('xls')) {
+      this.error = 'Only Excel files can be uploaded.'
+      return
+    }
+
+    this.error = null
+
     this.reader
-      .load(files[0])
+      .load(file)
       .then(this.reader.parseData)
       .then(data => this.handleData(data))
   }

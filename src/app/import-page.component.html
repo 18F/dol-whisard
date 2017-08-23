@@ -16,7 +16,10 @@
   <h1 class='mb3'>Import Excel File</h1>
   <div class='mb3'>
     <div class='mb1 h3'>1. Select file</div>
-    <input type='file' (change)='loadFile($event)' multiple='false'>
+    <input type='file' (change)='handleUpload($event)' multiple='false'>
+    <div *ngIf='error' class='my2 px2 py1 white bg-red rounded'>
+      <strong>Uh-oh!</strong> {{ error }}
+    </div>
     <div *ngIf='data && data.length' class='mt3'>
       <div class='mb1 h6'>
         <strong class='caps'>Preview data</strong> (first 5 rows)
