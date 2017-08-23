@@ -25,7 +25,7 @@ export const cleanData = data => {
   return { keys, entries }
 }
 
-export const COLUMNS = [
+export const expectedFields = [
   {
     id: 'Ee_F_Name',
     name: 'First name',

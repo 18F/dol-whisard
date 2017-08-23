@@ -62,6 +62,16 @@ td {
   border-bottom: 0;
 }
 
+.table-bordered {
+  border: 1px solid #eee;
+  border-collapse: collapse;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #eee;
+}
+
 .h-2 {
   height: 2rem;
 }

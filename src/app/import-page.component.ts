@@ -1,18 +1,17 @@
 import { Component } from '@angular/core'
 
 import { FileReaderService } from './_service/file-reader.service'
-import { cleanData, COLUMNS } from './_util'
+import { cleanData, expectedFields } from './_util'
 
 @Component({
   selector: 'app-import',
   templateUrl: './import-page.component.html',
 })
 export class ImportPageComponent {
-  cols = COLUMNS
+  fields = expectedFields.map(d => ({ ...d, match: null }))
   data = null
   dataKeys = null
   dataRaw = null
-  idx = 0
 
   constructor(private reader: FileReaderService) {}
 
@@ -40,14 +39,13 @@ export class ImportPageComponent {
     this.data = entries
     this.dataKeys = keys
     this.dataRaw = dataRaw
-    this.idx = 0
   }
 
   downloadData() {
     this.reader.downloadData(this.dataRaw)
   }
 
-  seek(n) {
-    this.idx += n
+  mapField(a, b) {
+    console.log(a, b)
   }
 }
