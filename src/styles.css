@@ -72,6 +72,11 @@ td {
   border: 1px solid #eee;
 }
 
+.px-tiny {
+  padding-left: .25rem;
+  padding-right: .25rem;
+}
+
 .h-2 {
   height: 2rem;
 }

@@ -3,6 +3,8 @@ import { Component } from '@angular/core'
 import { FileReaderService } from './_service/file-reader.service'
 import { cleanData, expectedFields } from './_util'
 
+const fieldsInit = expectedFields.map(d => ({ ...d, match: null }))
+
 @Component({
   selector: 'app-import',
   templateUrl: './import-page.component.html',
@@ -12,31 +14,30 @@ export class ImportPageComponent {
   dataKeys = null
   dataRaw = null
   error = null
-  fields = expectedFields.map(d => ({ ...d, match: null }))
+  fields = [...fieldsInit]
+  idx = 0
 
   constructor(private reader: FileReaderService) {}
 
   handleUpload(e) {
     const files = e.target.files
-    const file = files[0]
-    const ext = file.name.split('.').pop()
 
-    if (files.length !== 1) {
-      this.error = 'Only one file can be uploaded at a time.'
-      return
-    }
-
-    if (!ext.includes('xls')) {
-      this.error = 'Only Excel files can be uploaded.'
-      return
-    }
-
-    this.error = null
+    this.error = this.checkFiles(files)
+    if (this.error) return
 
     this.reader
-      .load(file)
+      .load(files[0])
       .then(this.reader.parseData)
       .then(data => this.handleData(data))
+  }
+
+  checkFiles(files) {
+    const file = files[0]
+    const ext = file && file.name.split('.').pop()
+
+    if (files.length !== 1) return 'Please upload one file at a time.'
+    if (!ext.includes('xls')) return 'Only Excel files can be uploaded.'
+    return null
   }
 
   // reformat data (to array of objects)
@@ -49,6 +50,8 @@ export class ImportPageComponent {
     this.data = entries
     this.dataKeys = keys
     this.dataRaw = dataRaw
+    this.fields = [...fieldsInit]
+    this.idx = 0
   }
 
   downloadData() {
@@ -59,5 +62,9 @@ export class ImportPageComponent {
     this.fields = this.fields.map(
       d => (d.id === fieldId ? { ...d, match: importCol } : d),
     )
+  }
+
+  seek(n) {
+    this.idx += n
   }
 }

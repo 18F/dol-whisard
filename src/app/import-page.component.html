@@ -12,7 +12,6 @@
 </div>
 
 <div class='p2 container mx-auto'>
-
   <h1 class='mb3'>Import Excel File</h1>
   <div class='mb3'>
     <div class='mb1 h3'>1. Select file</div>
@@ -40,7 +39,6 @@
       </div>
     </div>
   </div>
-
   <div class='mb3'>
     <div class='mb1 h3'>2. Choose which columns to import</div>
     <div class="overflow-auto">
@@ -49,7 +47,30 @@
           <tr>
             <th class='col-4'>WHISARD Database</th>
             <th class='col-4'>Imported File</th>
-            <th class='col-4'>Sample Row</th>
+            <th class='col-4'>
+              <div *ngIf='data && data.length' class='right'>
+                <button
+                  type="button"
+                  class="btn btn-outline px1 py0 h5 regular"
+                  [disabled]="!idx"
+                  (click)="seek(-1)"
+                >
+                  ⇽
+                </button>
+                <span class='inline-block px-tiny h6 regular'>
+                  {{ idx + 1 }}
+                </span>
+                <button
+                  type="button"
+                  class="btn btn-outline px1 py0 h5 regular"
+                  [disabled]="idx + 1 === data.length"
+                  (click)="seek(1)"
+                >
+                  ⇾
+                </button>
+              </div>
+              <span>Sample Row</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -74,17 +95,15 @@
                   <option *ngFor="let key of dataKeys">{{ key }}</option>
                 </select>
               </td>
-              <td>{{ field.match ? data[0][field.match] : '--' }}</td>
+              <td>{{ field.match ? data[idx][field.match] : '--' }}</td>
             </ng-container>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
   <div>
     <button class='btn btn-primary regular' type='button'>Import</button>
     <button class='btn btn-outline regular' type='button'>Cancel</button>
   </div>
-
 </div>
