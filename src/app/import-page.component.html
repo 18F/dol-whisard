@@ -28,12 +28,12 @@
         <table class="h6 table-bordered nowrap">
           <thead>
             <tr>
-              <th *ngFor="let d of dataRaw[0]">{{ d }}</th>
+              <th *ngFor="let cell of dataRaw[0]">{{ cell }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let i of [1, 2, 3, 4, 5]">
-              <td *ngFor="let d of dataRaw[i]">{{ d }}</td>
+            <tr *ngFor="let row of dataRaw.slice(1, 6)">
+              <td *ngFor="let cell of row">{{ cell }}</td>
             </tr>
           </tbody>
         </table>
@@ -67,13 +67,14 @@
               <td>
                 <select
                   class='select m0 h-2 sm-col-10'
-                  (change)="mapField(field, $event.target.value)"
+                  [value]='field.match || "--"'
+                  (change)="mapField(field.id, $event.target.value)"
                 >
-                  <option disabled='true'>Select column</option>
+                  <option disabled='true' value='--'>Select column</option>
                   <option *ngFor="let key of dataKeys">{{ key }}</option>
                 </select>
               </td>
-              <td>...</td>
+              <td>{{ field.match ? data[0][field.match] : '--' }}</td>
             </ng-container>
           </tr>
         </tbody>

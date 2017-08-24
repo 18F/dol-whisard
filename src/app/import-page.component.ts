@@ -8,11 +8,11 @@ import { cleanData, expectedFields } from './_util'
   templateUrl: './import-page.component.html',
 })
 export class ImportPageComponent {
-  fields = expectedFields.map(d => ({ ...d, match: null }))
-  error = null
   data = null
   dataKeys = null
   dataRaw = null
+  error = null
+  fields = expectedFields.map(d => ({ ...d, match: null }))
 
   constructor(private reader: FileReaderService) {}
 
@@ -39,8 +39,8 @@ export class ImportPageComponent {
       .then(data => this.handleData(data))
   }
 
+  // reformat data (to array of objects)
   handleData(dataRaw) {
-    // reformat data (to array of objects)
     const dataClean = cleanData(dataRaw)
     if (!dataClean) return
 
@@ -55,7 +55,9 @@ export class ImportPageComponent {
     this.reader.downloadData(this.dataRaw)
   }
 
-  mapField(a, b) {
-    console.log(a, b)
+  mapField(fieldId, importCol) {
+    this.fields = this.fields.map(
+      d => (d.id === fieldId ? { ...d, match: importCol } : d),
+    )
   }
 }
